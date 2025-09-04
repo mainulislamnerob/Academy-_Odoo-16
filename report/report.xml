@@ -1,0 +1,10 @@
+<odoo>
+  <record id="report_academy_session" model="ir.actions.report">
+    <field name="name">Session Sheet</field>
+    <field name="model">academy.session</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">academy.report_session</field>
+    <field name="report_file">academy.report_session</field>
+    <field name="print_report_name">'Session - %s' % (object.name)</field>
+  </record>
+</odoo>

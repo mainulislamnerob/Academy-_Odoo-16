@@ -1,0 +1,32 @@
+from odoo import models, fields, api
+
+class Course(models.Model):
+    _name = "academy.course"
+    _description = "Course"
+
+    name = fields.Char(required=True)
+    description = fields.Text()
+    responsible_id = fields.Many2one("res.users", string="Responsible")
+
+    level = fields.Selection(
+        [
+            ("beginner", "Beginner"),
+            ("intermediate", "Intermediate"),
+            ("advanced", "Advanced"),
+        ],
+        string="Level",
+        default="beginner",
+        required=True,
+    )
+
+    session_ids = fields.One2many("academy.session", "course_id", string="Sessions")
+    session_count = fields.Integer(string="Session Count", compute="_compute_session_count")
+
+    _sql_constraints = [
+        ("name_unique", "unique(name)", "Course name must be unique."),
+    ]
+
+    @api.depends("session_ids")
+    def _compute_session_count(self):
+        for rec in self:
+            rec.session_count = len(rec.session_ids)

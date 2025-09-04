@@ -1,0 +1,12 @@
+<odoo>
+  <act_window id="action_academy_course" name="Courses"
+              res_model="academy.course" view_mode="tree,form"/>
+  <act_window id="action_academy_session" name="Sessions"
+              res_model="academy.session" view_mode="tree,form,calendar"/>
+
+  <menuitem id="academy_menu_root" name="Academy"/>
+  <menuitem id="academy_menu_courses" name="Courses"
+            parent="academy_menu_root" action="action_academy_course" sequence="10"/>
+  <menuitem id="academy_menu_sessions" name="Sessions"
+            parent="academy_menu_root" action="action_academy_session" sequence="20"/>
+</odoo>

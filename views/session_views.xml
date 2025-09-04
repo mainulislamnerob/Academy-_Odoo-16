@@ -1,0 +1,73 @@
+<odoo>
+  <record id="view_academy_session_tree" model="ir.ui.view">
+    <field name="name">academy.session.tree</field>
+    <field name="model">academy.session</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="course_id"/>
+        <field name="instructor_id"/>
+        <field name="start_date"/>
+        <field name="duration"/>
+        <field name="seats"/>
+        <field name="taken_seats" widget="progressbar"/>
+        <field name="active"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="view_academy_session_form" model="ir.ui.view">
+    <field name="name">academy.session.form</field>
+    <field name="model">academy.session</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="course_id"/>
+            <field name="instructor_id" options="{'no_create': False}"/>
+          </group>
+          <group>
+            <field name="start_date"/>
+            <field name="duration"/>
+            <field name="seats"/>
+            <field name="taken_seats" readonly="1"/>
+            <field name="active"/>
+          </group>
+          <notebook>
+            <page string="Attendees">
+              <field name="attendee_ids" widget="many2many_tags"/>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_academy_session_calendar" model="ir.ui.view">
+    <field name="name">academy.session.calendar</field>
+    <field name="model">academy.session</field>
+    <field name="arch" type="xml">
+      <calendar string="Sessions" date_start="start_date" color="course_id"/>
+    </field>
+  </record>
+
+  <record id="view_academy_session_graph" model="ir.ui.view">
+    <field name="name">academy.session.graph</field>
+    <field name="model">academy.session</field>
+    <field name="arch" type="xml">
+      <graph string="Sessions by Course" type="bar">
+        <field name="course_id" type="row"/>
+        <field name="seats" type="measure"/>
+        <field name="taken_seats" type="measure"/>
+      </graph>
+    </field>
+  </record>
+
+  <record id="action_academy_session" model="ir.actions.act_window">
+    <field name="name">Sessions</field>
+    <field name="res_model">academy.session</field>
+    <field name="view_mode">tree,form,calendar,graph</field>
+    <field name="context">{}</field>
+  </record>
+</odoo>

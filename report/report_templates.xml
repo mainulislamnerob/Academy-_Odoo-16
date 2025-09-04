@@ -1,0 +1,25 @@
+<odoo>
+  <template id="report_session">
+    <t t-name="academy.report_session">
+      <t t-call="web.external_layout">
+        <div class="page" t-foreach="docs" t-as="o">
+          <h2>Session: <t t-esc="o.name"/></h2>
+          <p><b>Course:</b> <t t-esc="o.course_id.display_name"/></p>
+          <p><b>Instructor:</b> <t t-esc="o.instructor_id.display_name"/></p>
+          <p>
+            <b>Start:</b> <t t-esc="o.start_date"/>
+            — <b>Duration:</b> <t t-esc="o.duration"/> days
+          </p>
+          <p>
+            <b>Seats:</b> <t t-esc="o.seats"/>
+            — <b>Taken:</b> <t t-esc="o.taken_seats"/>%
+          </p>
+          <h4>Attendees</h4>
+          <ul>
+            <li t-foreach="o.attendee_ids" t-as="p"><t t-esc="p.display_name"/></li>
+          </ul>
+        </div>
+      </t>
+    </t>
+  </template>
+</odoo>
